@@ -5,4 +5,9 @@ labs/
 __pycache__/
 *.pyc
 .DS_Store
-state/
+state/*
+!state/profiles/
+state/profiles/*
+!state/profiles/MaiVanTruong-2A202602983/
+state/profiles/MaiVanTruong-2A202602983/*
+!state/profiles/MaiVanTruong-2A202602983/User.md

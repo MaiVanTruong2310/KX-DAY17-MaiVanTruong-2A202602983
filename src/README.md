@@ -11,6 +11,8 @@ python -m pytest src/test_agents.py -q
 
 Benchmark mặc định dùng chế độ offline, không cần API key hay thư viện ngoài Python. Cài `pytest` để chạy kiểm thử. Hai tập `data/conversations.json` và `data/advanced_long_context.json` được giữ nguyên.
 
+Hồ sơ mẫu của sinh viên nằm ở `state/profiles/MaiVanTruong-2A202602983/User.md`. Agent đọc hồ sơ này khi gọi với `user_id="MaiVanTruong-2A202602983"`. Các hồ sơ khác được tạo trong `state/` khi chạy và không được đưa lên Git.
+
 Muốn dùng model thật, cài LangChain và gói tích hợp tương ứng, tạo `.env` ở thư mục gốc rồi đặt `LIVE_MODE=1`, `LLM_PROVIDER`, `LLM_MODEL` và API key/base URL tương ứng. Các provider được hỗ trợ: `openai`, `custom`, `gemini`, `anthropic`, `ollama`, `openrouter`. Chế độ live chưa được dùng để tính các số liệu trong báo cáo.
 
 - `model_provider.py`, `config.py`: cấu hình và tạo model theo provider.
