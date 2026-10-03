@@ -1,19 +1,23 @@
-# Student Scaffold
+# Day 17 implementation
 
-This `src/` folder is the student version of the lab.
+**Sinh viên:** Mai Văn Trường — **MSSV:** 2A202602983
 
-- It keeps the same high-level structure
-- The Python files are intentionally incomplete and contain pseudocode / TODOs
-- The benchmark structure should include: standard benchmark + long-context stress benchmark
-- The runtime should support these providers: `openai`, `custom`, `gemini`, `anthropic`, `ollama`, `openrouter`
+Chạy từ thư mục gốc dự án bằng Python 3.11+:
 
-Suggested flow:
+```bash
+python src/benchmark.py
+python -m pytest src/test_agents.py -q
+```
 
-1. Start with `config.py`
-2. Implement `memory_store.py`
-3. Finish `agent_baseline.py`
-4. Finish `agent_advanced.py`
-5. Implement `benchmark.py`
-6. Make `test_agents.py` pass
+Benchmark mặc định dùng chế độ offline, không cần API key hay thư viện ngoài Python. Cài `pytest` để chạy kiểm thử. Hai tập `data/conversations.json` và `data/advanced_long_context.json` được giữ nguyên.
 
-Datasets are available at the repo root in `data/`.
+Muốn dùng model thật, cài LangChain và gói tích hợp tương ứng, tạo `.env` ở thư mục gốc rồi đặt `LIVE_MODE=1`, `LLM_PROVIDER`, `LLM_MODEL` và API key/base URL tương ứng. Các provider được hỗ trợ: `openai`, `custom`, `gemini`, `anthropic`, `ollama`, `openrouter`. Chế độ live chưa được dùng để tính các số liệu trong báo cáo.
+
+- `model_provider.py`, `config.py`: cấu hình và tạo model theo provider.
+- `memory_store.py`: ước lượng token, lưu `User.md`, trích fact có quy tắc, nén thread.
+- `agent_baseline.py`: giữ toàn bộ lịch sử trong một thread, quên ở thread mới.
+- `agent_advanced.py`: dùng hồ sơ bền vững, summary và các message gần nhất.
+- `benchmark.py`: so sánh hai agent trên hai tập dữ liệu trong state tạm độc lập.
+- `test_agents.py`: kiểm tra lưu hồ sơ, đính chính, nhiễu, nhớ qua lần khởi tạo mới và hiệu quả compact.
+
+Xem [báo cáo kết quả](../REPORT.md) để biết số liệu, cách đo và giới hạn.
